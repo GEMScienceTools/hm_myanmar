@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.opensha.commons.geo.Location;
-import org.opensha.commons.geo.LocationList;
+import org.opensha.sha.faultSurface.FaultTrace;
 import org.opensha.sha.magdist.IncrementalMagFreqDist;
 
 public class GraemeFaultGeometryAndSeismicityParser {
@@ -20,7 +20,7 @@ public class GraemeFaultGeometryAndSeismicityParser {
 		String line;
 		String name = "";
 		String[] stringArray,stringArrayB;
-		LocationList trace = null;
+		FaultTrace trace = null;
 		IncrementalMagFreqDist fmd;
 		
 		// Define patterns
@@ -28,11 +28,10 @@ public class GraemeFaultGeometryAndSeismicityParser {
 		Pattern charFmdPatt = Pattern.compile("Char Eq.");
 		Pattern ratePatt = Pattern.compile("Rate \\[");
 		Pattern wordPatt = Pattern.compile("\\w+");
-		Pattern magminPatt = Pattern.compile("([0-9]+\\.[0-9]+)");
 		Matcher mtchGrFmd;
 		Matcher mtchCharFmd;
 		Matcher mtchRate;
-		Matcher mtchWord, mtchMagmin;
+		Matcher mtchWord;
 		
 		this.geomSeismHash = new HashMap<String,GraemeFaultGeometryAndSeismicity>();
 		
@@ -120,7 +119,7 @@ public class GraemeFaultGeometryAndSeismicityParser {
 					split(" ");
 				int cnt = 0;
 				
-				trace = new LocationList();
+				trace = new FaultTrace(name);
 				while (cnt < stringArray.length-1){
 					System.out.println("== "+stringArray[cnt]+" "+stringArray[cnt+1]);
 
@@ -136,5 +135,6 @@ public class GraemeFaultGeometryAndSeismicityParser {
 				System.out.println("this is an error");
 			}
 		}
+		
 	}
 }

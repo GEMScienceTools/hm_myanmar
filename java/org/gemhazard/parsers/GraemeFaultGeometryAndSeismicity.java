@@ -1,10 +1,10 @@
 package org.gemhazard.parsers;
 
-import org.opensha.commons.geo.LocationList;
+import org.opensha.sha.faultSurface.FaultTrace;
 import org.opensha.sha.magdist.IncrementalMagFreqDist;
 
 public class GraemeFaultGeometryAndSeismicity {
-	LocationList traceLocationList; 
+	FaultTrace traceLocationList; 
 	String name;
 	String recurrenceModel;
 	double rateAtMag, magForRate;
@@ -14,7 +14,7 @@ public class GraemeFaultGeometryAndSeismicity {
 	
 	// Constructor in case of GR model
 	public GraemeFaultGeometryAndSeismicity(
-			LocationList trace,
+			FaultTrace trace,
 			double magForRate,
 			double rateAtMag,
 			double gutRichBvalue){
@@ -28,7 +28,7 @@ public class GraemeFaultGeometryAndSeismicity {
 	
 	// Constructor in case of CHAR model
 	public GraemeFaultGeometryAndSeismicity(
-			LocationList trace,
+			FaultTrace trace,
 			IncrementalMagFreqDist fmd){
 		this.traceLocationList = trace;
 		this.incrFmd = fmd;
