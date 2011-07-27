@@ -1,12 +1,13 @@
 package org.gemhazard.parsers;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.opensha.commons.geo.LocationList;
+import org.gem.engine.hazard.parsers.GemFileParser;
 import org.opensha.sha.earthquake.rupForecastImpl.GEM1.SourceData.GEMFaultSourceData;
 import org.opensha.sha.earthquake.rupForecastImpl.GEM1.SourceData.GEMSourceData;
 import org.opensha.sha.magdist.IncrementalMagFreqDist;
@@ -93,6 +94,13 @@ public class MyanmarFaultParser {
 		// Close Readers
 		faultData.close();
 		faultGeometries.close();
+		
+		// Create NRML output file
+		GemFileParser gemfp = new GemFileParser();
+		gemfp.setList(sourceList);
+		File file = new File(mainDirectory+"myanmarFaults.nrml");
+		gemfp.writeSource2NrmlFormat(file);
+		System.out.println("Done");
 	}
 	
 	/**
